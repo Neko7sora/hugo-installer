@@ -1,7 +1,7 @@
 {
   "name": "@neko7sora/hugo-installer",
   "description": "Installs hugo into your repository.",
-  "version": "4.0.1-",
+  "version": "4.0.1-neko7sora",
   "license": "MIT",
   "repository": {
     "type": "git",
