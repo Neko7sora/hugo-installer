@@ -22,7 +22,7 @@
   "scripts": {
     "build": "npm run build:clean && npm run build:bundle && npm run build:assets",
     "build:assets": "shx cp package.json dist/package.json && shx cp CHANGELOG.md dist/CHANGELOG.md && shx cp LICENSE dist/LICENSE && shx cp README.md dist/README.md",
-    "build:bundle": "esbuild bin/hugo-installer.ts --bundle --outdir=dist/bin --platform=node --target=node18 --format=esm --packages=external",
+    "build:bundle": "esbuild bin/hugo-installer.ts --bundle --outdir=dist/bin --platform=node --target=node18 --format=esm",
     "build:clean": "shx rm -rf dist",
     "generate-hugo-releases-meta": "esbuild tools/generate-hugo-releases-meta.ts --bundle --outdir=tools --platform=node --target=node18 --format=esm --packages=external && node ./tools/generate-hugo-releases-meta.js",
     "lint": "eslint src/install-hugo.ts bin/** --max-warnings 0",
@@ -39,7 +39,8 @@
     "yargs": "17.6.2"
   },
   "devDependencies": {
-    "@types/node": "18.11.16",
+    "@types/decompress": "4.2.4",
+    "@types/node": "18.11.17",
     "@types/object-path": "0.11.1",
     "@types/semver": "7.3.13",
     "@types/yargs": "17.0.17",
