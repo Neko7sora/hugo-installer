@@ -1,11 +1,11 @@
 {
   "name": "@neko7sora/hugo-installer",
   "description": "Installs hugo into your repository.",
-  "version": "4.0.1-neko7sora",
+  "version": "4.0.1-fork",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dominique-mueller/hugo-installer"
+    "url": "https://github.com/Neko7sora/hugo-installer"
   },
   "keywords": [
     "hugo",
@@ -22,7 +22,7 @@
   "scripts": {
     "build": "npm run build:clean && npm run build:bundle && npm run build:assets",
     "build:assets": "shx cp package.json dist/package.json && shx cp CHANGELOG.md dist/CHANGELOG.md && shx cp LICENSE dist/LICENSE && shx cp README.md dist/README.md",
-    "build:bundle": "esbuild bin/hugo-installer.ts --bundle --outdir=dist/bin --platform=node --target=node18 --format=esm",
+    "build:bundle": "esbuild bin/hugo-installer.ts --bundle --outdir=dist/bin --platform=node --target=node18 --format=esm --minify=true",
     "build:clean": "shx rm -rf dist",
     "generate-hugo-releases-meta": "esbuild tools/generate-hugo-releases-meta.ts --bundle --outdir=tools --platform=node --target=node18 --format=esm --packages=external && node ./tools/generate-hugo-releases-meta.js",
     "lint": "eslint src/install-hugo.ts bin/** --max-warnings 0",
