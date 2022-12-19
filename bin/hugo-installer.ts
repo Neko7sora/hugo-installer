@@ -13,7 +13,7 @@ import { hideBin } from 'yargs/helpers';
 // TypeScript, however, will not add any file extension (made sense so far), and won't do so in the future in order to avoid rewriting code.
 // Thus, we add the file extension on our own, and TypeScript seems to continue working just fine.
 // TODO: Create a fancy rollup plugin that does this?
-import { installHugo } from '../index.js';
+import { installHugo } from '../src/install-hugo';
 import { InstallHugoOptions } from '../src/install-hugo.interfaces.js';
 
 // Read CLI parameters

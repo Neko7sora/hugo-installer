@@ -16,25 +16,18 @@
     "dependency"
   ],
   "type": "module",
-  "exports": {
-    ".": {
-      "import": "./index.js"
-    }
-  },
-  "module": "./index.js",
-  "types": "./index.d.ts",
   "bin": {
     "hugo-installer": "./bin/hugo-installer.js"
   },
   "scripts": {
     "build": "npm run build:clean && npm run build:bundle && npm run build:assets",
-    "build:assets": "copyfiles package.json CHANGELOG.md LICENSE README.md dist",
-    "build:bundle": "rollup --config rollup.config.js",
-    "build:clean": "rimraf -r dist",
-    "generate-hugo-releases-meta": "node --experimental-specifier-resolution=node --loader ts-node/esm ./tools/generate-hugo-releases-meta.ts",
-    "lint": "eslint index.ts bin/** --max-warnings 0",
-    "lint:fix": "eslint index.ts bin/** --max-warnings 0 --fix",
-    "test": "rimraf -r test-output && node dist/bin/hugo-installer --version 0.103.0 --destination test-output/hugo-0.103.0"
+    "build:assets": "shx cp package.json dist/package.json && shx cp CHANGELOG.md dist/CHANGELOG.md && shx cp LICENSE dist/LICENSE && shx cp README.md dist/README.md",
+    "build:bundle": "esbuild bin/hugo-installer.ts --bundle --outdir=dist/bin --platform=node --target=node18 --format=esm --packages=external",
+    "build:clean": "shx rm -rf dist",
+    "generate-hugo-releases-meta": "esbuild tools/generate-hugo-releases-meta.ts --bundle --outdir=tools --platform=node --target=node18 --format=esm --packages=external && node ./tools/generate-hugo-releases-meta.js",
+    "lint": "eslint src/install-hugo.ts bin/** --max-warnings 0",
+    "lint:fix": "eslint src/install-hugo.ts bin/** --max-warnings 0 --fix",
+    "test": "shx rm -rf test-output && node dist/bin/hugo-installer --version 0.103.0 --destination test-output/hugo-0.103.0"
   },
   "dependencies": {
     "decompress": "4.2.1",
@@ -46,10 +39,6 @@
     "yargs": "17.6.2"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "23.0.5",
-    "@rollup/plugin-json": "5.0.2",
-    "@rollup/plugin-node-resolve": "15.0.1",
-    "@rollup/plugin-typescript": "10.0.1",
     "@types/decompress": "4.2.4",
     "@types/node": "18.11.16",
     "@types/object-path": "0.11.1",
@@ -57,20 +46,14 @@
     "@types/yargs": "17.0.17",
     "@typescript-eslint/eslint-plugin": "5.46.1",
     "@typescript-eslint/parser": "5.46.1",
-    "copyfiles": "2.4.1",
+    "esbuild": "^0.16.9",
     "eslint": "8.30.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-typescript": "4.2.1",
     "eslint-plugin-simple-import-sort": "8.0.0",
     "prettier": "2.8.1",
-    "rimraf": "3.0.2",
-    "rollup": "3.7.4",
-    "rollup-plugin-bundle-size": "1.0.3",
-    "rollup-plugin-node-externals": "5.0.2",
-    "rollup-plugin-preserve-shebangs": "0.2.0",
-    "rollup-plugin-typescript2": "0.34.1",
-    "ts-node": "10.9.1",
+    "shx": "^0.3.4",
     "typescript": "4.9.4"
   }
 }
