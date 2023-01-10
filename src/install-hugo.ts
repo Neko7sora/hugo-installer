@@ -192,7 +192,7 @@ const writeBinaryToDisk = async (binaryAsBuffer, { destination }: Pick<InstallHu
   // Apply file permissions
   await Promise.all(
     decompressedFiles.map((decompressedFile) => {
-      return fs.promises.chmod(path.join(destination, decompressedFile.path), 0o755);
+      return fs.promises.chmod(path.join(destination, decompressedFile.path).replace(/\//g, '\\\\'), 0o755);
     }),
   );
 };
@@ -205,7 +205,7 @@ const verifyBinaryHealth = async ({ destination }: Pick<InstallHugoOptions, 'des
 
   return new Promise<string>((resolve, reject): void => {
     let hugoVersionConsoleOutput = null;
-    const childProcess = spawn(path.join(destination, 'hugo'), ['version']);
+    const childProcess = spawn(path.join(destination, 'hugo').replace(/\//g, '\\\\'), ['version']);
     childProcess.stdout.on('data', (data) => {
       hugoVersionConsoleOutput = data.toString().replace(/\r?\n|\r/g, '');
     });
