@@ -36,7 +36,7 @@
     "hpagent": "1.2.0",
     "object-path": "0.11.8",
     "semver": "7.3.8",
-    "yargs": "17.6.2"
+    "yargs": "17.7.0"
   },
   "devDependencies": {
     "@types/decompress": "4.2.4",
