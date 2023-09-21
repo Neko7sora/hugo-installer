@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "decompress": "github:XhmikosR/decompress#afe01ba",
-    "del": "7.0.0",
+    "del": "7.1.0",
     "got": "12.5.3",
     "hpagent": "1.2.0",
     "object-path": "0.11.8",
